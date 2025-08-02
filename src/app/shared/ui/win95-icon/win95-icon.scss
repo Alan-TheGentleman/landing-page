@@ -1,0 +1,68 @@
+.win95-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  width: 80px;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+
+  &:hover {
+    background-color: rgba(0, 0, 128, 0.1);
+  }
+
+  &--selected {
+    background-color: #000080;
+    color: white;
+    border: 1px dotted #ffffff;
+    
+    .win95-icon__label {
+      color: white;
+      background-color: #000080;
+    }
+  }
+
+  &__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 4px;
+
+    .folder-icon,
+    .file-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .image-frame {
+      border: 1px inset #c0c0c0;
+      padding: 2px;
+      background-color: #c0c0c0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+
+      .icon-image {
+        max-width: 32px;
+        max-height: 32px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__label {
+    font-family: "MS Sans Serif", sans-serif;
+    font-size: 11px;
+    text-align: center;
+    color: #000000;
+    line-height: 1.2;
+    word-wrap: break-word;
+    max-width: 72px;
+    padding: 2px;
+  }
+}

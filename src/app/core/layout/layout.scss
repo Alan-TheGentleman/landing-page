@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.layout-container {
+  height: 80vh;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex: 1;
+  min-height: 400px;
+}
+
+.title-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: darkblue;
+  padding: 0.5rem;
+  color: white;
+  margin: -0.5rem -0.5rem 0.5rem -0.5rem;
+
+  .title-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row;
+    align-items: center;
+
+    .block {
+      width: 5px;
+      height: 5px;
+      border: 2px solid black;
+      font-weight: bold;
+    }
+
+    ::ng-deep {
+      button {
+        width: 28px;
+        height: 28px;
+        font-weight: bolder;
+      }
+    }
+  }
+}
+
+@media (width < 960px) {
+  .layout-container {
+    height: calc(100dvh - 195px);
+  }
+}

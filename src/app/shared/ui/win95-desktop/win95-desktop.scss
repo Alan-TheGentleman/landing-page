@@ -1,0 +1,19 @@
+.win95-desktop {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-gap: 16px;
+  align-content: start;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .win95-desktop {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    grid-gap: 12px;
+    padding: 12px;
+  }
+}

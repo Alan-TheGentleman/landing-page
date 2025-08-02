@@ -1,0 +1,188 @@
+// Windows 95 About Page Styles
+.about-container {
+  padding: 8px;
+
+  .main-card {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.win95-secondary {
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  color: #808080;
+}
+
+.win95-list-item {
+  padding: 4px;
+  border-bottom: 1px solid #c0c0c0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.win95-achievement {
+  background-color: white;
+  border: 1px inset #c0c0c0;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+
+// Hero Section
+.hero-section {
+  margin-bottom: 16px;
+}
+
+.profile-section {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+
+  .profile-image {
+    display: block;
+  }
+
+  .profile-info {
+    flex: 1;
+
+    .tagline {
+      font-family: "MS Sans Serif", sans-serif;
+      font-size: 11px;
+      color: #000080;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .description {
+      font-family: "MS Sans Serif", sans-serif;
+      font-size: 11px;
+      color: #000000;
+      line-height: 1.3;
+    }
+  }
+}
+
+// Experience Section
+.experience-section {
+  margin-bottom: 16px;
+}
+
+.timeline {
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 8px;
+
+  .timeline-content {
+    background-color: white;
+    padding: 8px;
+    border: 1px inset #c0c0c0;
+
+    .job-title {
+      font-family: "MS Sans Serif", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      color: #000080;
+      margin: 0 0 4px 0;
+    }
+
+    .company-period {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      gap: 8px;
+    }
+
+    .job-description {
+      font-family: "MS Sans Serif", sans-serif;
+      font-size: 11px;
+      color: #000000;
+      line-height: 1.3;
+      margin: 0;
+    }
+  }
+}
+
+// Achievements Section
+.achievements-section {
+  margin-bottom: 16px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4px;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+
+  .achievement-icon {
+    font-family: "MS Sans Serif", sans-serif;
+    font-size: 11px;
+    color: #000080;
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+
+  .achievement-text {
+    font-family: "MS Sans Serif", sans-serif;
+    font-size: 11px;
+    color: #000000;
+    line-height: 1.3;
+  }
+}
+
+// Contact Section
+.contact-section {
+  .contact-info {
+    background-color: white;
+    border: 2px inset #c0c0c0;
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  p {
+    margin: 0 0 8px 0;
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .profile-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+
+    .image-frame {
+      align-self: center;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: auto;
+    }
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    .timeline-item .timeline-marker {
+      left: -16px;
+    }
+  }
+
+  .company-period {
+    flex-direction: column;
+    gap: 2px !important;
+  }
+}

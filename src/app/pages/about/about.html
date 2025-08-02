@@ -1,0 +1,82 @@
+<app-layout>
+  <div class="about-container">
+    <app-card title="About - Gentleman Programming" class="main-card">
+      <!-- Hero Section -->
+      <app-win95-group>
+        <div class="profile-section">
+          <div class="image-frame">
+            <img
+              src="gentleman.webp"
+              alt="Gentleman Programming Profile"
+              aria-label="Profile image of Gentleman Programming"
+              class="profile-image pixelated"
+              width="200"
+              height="150"
+            />
+          </div>
+          <div class="profile-info">
+            <h2 class="win95-title">Passionate Developer & Mentor</h2>
+            <app-win95-info-box>
+              <p class="tagline">
+                Transforming developers and teams through modern technologies
+                and best practices
+              </p>
+              <p class="description">
+                With over 15 years of experience in software development, I
+                specialize in modern web technologies and have a passion for
+                teaching and mentoring the next generation of developers. My
+                mission is to help individuals and companies achieve their full
+                potential in the tech industry.
+              </p>
+            </app-win95-info-box>
+          </div>
+        </div>
+      </app-win95-group>
+
+      <!-- Experience Section -->
+      <app-win95-group title="Professional Experience">
+        <div class="timeline win95-listbox">
+          @for(exp of experience; track exp.company) {
+          <div class="timeline-item win95-list-item">
+            <div class="timeline-content">
+              <h4 class="job-title">{{exp.role}}</h4>
+              <div class="company-period">
+                <span class="company win95-label">{{exp.company}}</span>
+                <span class="period win95-secondary">{{exp.period}}</span>
+              </div>
+              <p class="job-description win95-text">{{exp.description}}</p>
+            </div>
+          </div>
+          }
+        </div>
+      </app-win95-group>
+
+      <!-- Achievements Section -->
+      <app-win95-group title="Key Achievements">
+        <div class="achievements-grid">
+          @for(achievement of achievements; track achievement) {
+          <div class="achievement-item win95-achievement">
+            <span class="achievement-icon">■</span>
+            <span class="achievement-text win95-text">{{achievement}}</span>
+          </div>
+          }
+        </div>
+      </app-win95-group>
+
+      <!-- Contact Section -->
+      <app-win95-group title="Let's Connect">
+        <app-win95-info-box>
+          <p class="win95-text">
+            Ready to start your learning journey or discuss a project? I'd love
+            to hear from you!
+          </p>
+          <div class="contact-buttons win95-button-group">
+            <app-button>Send Message</app-button>
+            <app-button>View Portfolio</app-button>
+            <app-button>Download CV</app-button>
+          </div>
+        </app-win95-info-box>
+      </app-win95-group>
+    </app-card>
+  </div>
+</app-layout>

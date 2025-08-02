@@ -1,0 +1,27 @@
+<div 
+  class="win95-icon" 
+  [class.win95-icon--selected]="selected"
+  (click)="onSingleClick()"
+  (dblclick)="onDoubleClick()">
+  
+  <div class="win95-icon__image">
+    @if(type === 'folder') {
+      <div class="folder-icon">📁</div>
+    } @else if(type === 'file') {
+      <div class="file-icon">📄</div>
+    } @else if(type === 'image' && image) {
+      <div class="image-frame">
+        <img 
+          [ngSrc]="image" 
+          [alt]="title"
+          width="32" 
+          height="32"
+          class="icon-image pixelated"
+          priority
+        />
+      </div>
+    }
+  </div>
+  
+  <div class="win95-icon__label">{{ title }}</div>
+</div>

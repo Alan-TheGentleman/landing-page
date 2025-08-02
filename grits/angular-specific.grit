@@ -1,0 +1,71 @@
+
+// Angular-specific GritQL rules for Biome
+
+// 1. Prefer inject() over constructor injection
+Decorator\[\$d.name='Injectable'] ClassDeclaration \$c
+constructor(\$params)
+where \$params.length > 0 {
+register\_diagnostic(
+span = \$params.first(),
+message = "Usa `inject()` en lugar de inyección por constructor"
+)
+}
+
+// 2. Prefer class/style bindings vs. ngClass/ngStyle
+ElementNode \$e
+where \$e.attributes\[@name='ngClass' or @name='ngStyle'] {
+register\_diagnostic(
+span = \$e.name,
+message = "Usa `[class]`/`[style]` en vez de `ngClass`/`ngStyle`"
+)
+}
+
+// 3. Avoid overly complex expressions in templates
+TemplateExpression \$expr
+where \$expr.toString().length > 50 {
+register\_diagnostic(
+span = \$expr,
+message = "Refactoriza esta expresión de plantilla a la clase TS"
+)
+}
+
+// 4. Enforce lifecycle hook interfaces
+ClassDeclaration \$c
+where \$c.methods\[@name =\~ /^ng\[A-Z]\[a-zA-Z]+\$/] and
+not \$c.heritageClauses\[@type.includes('OnInit','OnDestroy','OnChanges')] {
+register\_diagnostic(
+span = \$c.name,
+message = "Agrega `implements OnInit` (u otro hook) en la declaración de la clase"
+)
+}
+
+// 5. Mark Angular-decorated properties as readonly
+ClassDeclaration \$c
+PropertyDeclaration \$p
+where \$p.decorators\[@name='Input' or @name='Output' or @name.matches("/ViewChildren|ViewChild|ContentChildren/")] and
+not \$p.modifiers.includes('readonly') {
+register\_diagnostic(
+span = \$p.name,
+message = "Declara esta propiedad Angular como `readonly`"
+)
+}
+
+// 6. Use protected for members only used in templates
+ClassDeclaration \$c
+PropertyDeclaration \$p
+where \$c.templateBindingUses\[\$p.name] and
+\$p.modifiers.includes('public') {
+register\_diagnostic(
+span = \$p.name,
+message = "Cambia a `protected` este miembro usado solo en template"
+)
+}
+
+// 7. Enforce matching TS, HTML, CSS filenames for Components
+Decorator\[\$d.name='Component'] \$d
+where not fileMatchesComponentName(\$d) {
+register\_diagnostic(
+span = \$d.name,
+message = "Nombra tus ficheros de componente como `<nombre>.ts/.html/.css`"
+)
+}

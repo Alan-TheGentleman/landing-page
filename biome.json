@@ -1,0 +1,107 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "src/**/*.ts",
+      "src/**/*.js",
+      "src/**/*.html",
+      "src/**/*.css",
+      "src/**/*.scss"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80,
+    "attributePosition": "auto",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "useEditorconfig": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": ["kebab-case"],
+            "strictCase": true,
+            "requireAscii": true
+          }
+        },
+        "useNamingConvention": {
+          "level": "error",
+          "options": {
+            "conventions": [
+              {
+                "selector": { "kind": "class" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "interface" },
+                "formats": ["PascalCase"]
+              },
+              {
+                "selector": { "kind": "variable" },
+                "formats": ["camelCase", "CONSTANT_CASE"]
+              },
+              {
+                "selector": { "kind": "typeLike" },
+                "formats": ["PascalCase"]
+              }
+            ]
+          }
+        }
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": {
+          "level": "warn",
+          "options": { "maxAllowedComplexity": 10 }
+        },
+        "noExcessiveNestedTestSuites": {
+          "level": "warn",
+          "options": {}
+        }
+      }
+    }
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": false,
+      "jsxEverywhere": true
+    },
+    "formatter": {
+      "enabled": true,
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "expand": "auto"
+    },
+    "globals": ["ng", "Component", "Injectable"],
+    "linter": { "enabled": true },
+    "assist": { "enabled": true }
+  },
+  "css": {
+    "formatter": { "enabled": true },
+    "linter": { "enabled": true },
+    "assist": { "enabled": true }
+  },
+  "json": {
+    "parser": { "allowComments": false, "allowTrailingCommas": true },
+    "formatter": { "enabled": true },
+    "assist": { "enabled": true }
+  },
+  "grit": {
+    "linter": { "enabled": true },
+    "assist": { "enabled": true }
+  }
+}

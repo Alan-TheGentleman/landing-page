@@ -1,0 +1,42 @@
+<app-layout>
+  <div class="mentoring-container">
+    <app-card title="Private Mentoring Sessions" class="main-card">
+      <app-win95-group>
+        <h2 class="win95-title">Personalized 1-on-1 Mentoring</h2>
+        <app-win95-info-box>
+          <p class="win95-text">Get personalized guidance from an experienced developer who has worked with leading tech companies. 
+             Each session is tailored to your specific needs and career goals.</p>
+        </app-win95-info-box>
+      </app-win95-group>
+      
+      <app-win95-group title="Available Sessions">
+        <div class="sessions-grid">
+          @for(session of mentoringSessions; track session.title) {
+            <div class="session-item win95-session">
+              <app-win95-header [title]="session.title" type="card"></app-win95-header>
+              <div class="session-content">
+                <p class="description win95-text">{{session.description}}</p>
+                <div class="session-details win95-details">
+                  <span class="duration win95-label">Duration: {{session.duration}}</span>
+                  <span class="price win95-price">{{session.price}}</span>
+                </div>
+                <div class="session-actions">
+                  <app-button>Book Session</app-button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </app-win95-group>
+      
+      <app-win95-group title="Ready to Start Your Journey?">
+        <app-win95-info-box>
+          <p class="win95-text">Contact me to discuss your goals and customize a mentoring plan that fits your needs.</p>
+          <div class="contact-actions win95-button-group">
+            <app-button>Contact Me</app-button>
+          </div>
+        </app-win95-info-box>
+      </app-win95-group>
+    </app-card>
+  </div>
+</app-layout>

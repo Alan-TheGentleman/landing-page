@@ -1,0 +1,100 @@
+// Windows 95 Private Mentoring Page Styles
+.mentoring-container {
+  padding: 8px;
+
+  .main-card {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.win95-price {
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000080;
+}
+
+.win95-session {
+  background-color: white;
+  border: 2px inset #c0c0c0;
+  margin-bottom: 8px;
+}
+
+// Intro Section
+.intro-section {
+  text-align: center;
+  margin-bottom: 16px;
+
+  .intro-box {
+    background-color: white;
+    border: 2px inset #c0c0c0;
+    padding: 8px;
+    margin-top: 8px;
+  }
+}
+
+// Sessions Section
+.sessions-section {
+  margin-bottom: 16px;
+}
+
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.session-item {
+  .session-content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .description {
+      flex-grow: 1;
+    }
+
+    .session-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .duration,
+      .price {
+        padding: 2px 4px;
+        display: block;
+      }
+    }
+
+    .session-actions {
+      margin-top: 8px;
+      text-align: center;
+    }
+  }
+}
+
+// Contact Section
+.contact-section {
+  text-align: center;
+
+  .contact-info {
+    background-color: white;
+    border: 2px inset #c0c0c0;
+    padding: 8px;
+    margin-top: 8px;
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .sessions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .session-details {
+    flex-direction: column !important;
+  }
+}
