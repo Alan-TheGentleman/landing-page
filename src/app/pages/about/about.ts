@@ -5,12 +5,20 @@ import {
   Button,
   Win95GroupComponent,
   Win95InfoBoxComponent,
+  Win95BackButtonComponent,
 } from '@shared/ui';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [Layout, Card, Button, Win95GroupComponent, Win95InfoBoxComponent],
+  imports: [
+    Layout,
+    Card,
+    Button,
+    Win95GroupComponent,
+    Win95InfoBoxComponent,
+    Win95BackButtonComponent,
+  ],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

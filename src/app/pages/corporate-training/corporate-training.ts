@@ -5,6 +5,7 @@ import {
   Win95GroupComponent,
   Win95HeaderComponent,
   Win95InfoBoxComponent,
+  Win95BackButtonComponent,
 } from '@shared/ui';
 import { Layout } from '@src/app/core/layout/layout';
 
@@ -18,6 +19,7 @@ import { Layout } from '@src/app/core/layout/layout';
     Win95GroupComponent,
     Win95HeaderComponent,
     Win95InfoBoxComponent,
+    Win95BackButtonComponent,
   ],
   templateUrl: './corporate-training.html',
   styleUrl: './corporate-training.scss',

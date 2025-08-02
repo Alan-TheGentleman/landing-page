@@ -1,0 +1,36 @@
+.win95-back-button {
+  background-color: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  color: black;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  padding: 4px 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  
+  &:active {
+    border: 2px inset #c0c0c0;
+    background-color: #a0a0a0;
+  }
+  
+  &:focus {
+    outline: 1px dotted black;
+    outline-offset: -3px;
+  }
+}
+
+.back-icon {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.back-text {
+  font-weight: normal;
+}
