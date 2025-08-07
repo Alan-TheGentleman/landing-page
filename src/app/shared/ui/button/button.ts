@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, inject } from '@angular/core';
+import { SoundService } from '../../../services/sound.service';
 
 const BUTTON_TYPE_OPTIONS = {
   button: 'button',
@@ -14,10 +15,13 @@ const BUTTON_TYPE_OPTIONS = {
   styleUrl: './button.scss',
 })
 export class Button {
+  private soundService = inject(SoundService);
+  
   type = input<HTMLButtonElement['type']>(BUTTON_TYPE_OPTIONS.button);
   clicked = output<void>();
 
   onClick(): void {
+    this.soundService.play('button-click');
     this.clicked.emit();
   }
 }

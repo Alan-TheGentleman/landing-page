@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
+import { SoundService } from './sound.service';
 
 export interface WindowState {
   id: string;
@@ -15,6 +16,7 @@ export interface WindowState {
 })
 export class WindowManagerService {
   private windows = signal<WindowState[]>([]);
+  private soundService = inject(SoundService);
   
   // Expose windows as readonly signal
   readonly openWindows = this.windows.asReadonly();
@@ -30,6 +32,7 @@ export class WindowManagerService {
         minimized: w.id === window.id ? false : w.minimized
       }));
       this.windows.set(newWindows);
+      this.soundService.play('window-open');
     } else {
       // Crear nueva ventana y marcar todas las otras como inactivas
       const newWindows = this.windows().map(w => ({ ...w, active: false }));
@@ -40,6 +43,7 @@ export class WindowManagerService {
         maximized: false 
       });
       this.windows.set(newWindows);
+      this.soundService.play('window-open');
     }
   }
   
@@ -58,6 +62,7 @@ export class WindowManagerService {
     }
     
     this.windows.set(newWindows);
+    this.soundService.play('window-close');
   }
   
   focusWindow(windowId: string): void {
@@ -77,6 +82,7 @@ export class WindowManagerService {
       maximized: w.id === windowId ? false : w.maximized
     }));
     this.windows.set(newWindows);
+    this.soundService.play('window-minimize');
   }
   
   maximizeWindow(windowId: string): void {
@@ -86,6 +92,7 @@ export class WindowManagerService {
       minimized: w.id === windowId ? false : w.minimized
     }));
     this.windows.set(newWindows);
+    this.soundService.play('window-maximize');
   }
   
   restoreWindow(windowId: string): void {

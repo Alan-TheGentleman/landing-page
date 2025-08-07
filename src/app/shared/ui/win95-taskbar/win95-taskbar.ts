@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { WindowManagerService } from '../../../services/window-manager.service';
+import { SoundService } from '../../../services/sound.service';
 
 @Component({
   selector: 'app-win95-taskbar',
@@ -51,7 +52,11 @@ import { WindowManagerService } from '../../../services/window-manager.service';
             (click)="openExternal('https://github.com/Gentleman-Programming')"
             >🐙</span
           >
-          <span class="tray-icon" title="Sound Volume">🔊</span>
+          <span 
+            class="tray-icon tray-icon--clickable" 
+            [title]="soundService.isEnabled() ? 'Sound On - Click to mute' : 'Sound Off - Click to unmute'"
+            (click)="toggleSound()"
+          >{{ soundService.isEnabled() ? '🔊' : '🔇' }}</span>
         </div>
         <div class="taskbar-clock" title="Current Time">
           {{ currentTime() }}
@@ -117,6 +122,7 @@ import { WindowManagerService } from '../../../services/window-manager.service';
 })
 export class Win95TaskbarComponent {
   private router = inject(Router);
+  protected soundService = inject(SoundService);
   protected windowManager = inject(WindowManagerService);
 
   startMenuOpen = signal(false);
@@ -138,7 +144,9 @@ export class Win95TaskbarComponent {
   }
 
   toggleStartMenu(): void {
-    this.startMenuOpen.update((open) => !open);
+    const willBeOpen = !this.startMenuOpen();
+    this.startMenuOpen.set(willBeOpen);
+    this.soundService.play(willBeOpen ? 'menu-open' : 'menu-close');
   }
 
   focusWindow(id: string): void {
@@ -171,6 +179,7 @@ export class Win95TaskbarComponent {
   }
 
   navigateTo(route: string): void {
+    this.soundService.play('button-click');
     this.toggleStartMenu();
     
     // Define window properties based on route
@@ -213,5 +222,18 @@ export class Win95TaskbarComponent {
   openExternal(url: string): void {
     this.toggleStartMenu();
     window.open(url, '_blank');
+  }
+
+  toggleSound(): void {
+    const wasEnabled = this.soundService.isEnabled();
+    this.soundService.setEnabled(!wasEnabled);
+    
+    // Play a sound to confirm the action (only if enabling sounds)
+    if (!wasEnabled) {
+      // Small delay to ensure the service is enabled before playing
+      setTimeout(() => {
+        this.soundService.play('button-click');
+      }, 100);
+    }
   }
 }

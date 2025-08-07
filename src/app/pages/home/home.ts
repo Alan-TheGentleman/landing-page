@@ -1,11 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  BootScreenComponent,
   Win95IconComponent,
   Win95ModalComponent,
   Win95TaskbarComponent,
 } from '@shared/ui';
 import { WindowManagerService } from '../../services/window-manager.service';
+import { BootService } from '../../services/boot.service';
 
 interface FileSystemItem {
   id: string;
@@ -20,13 +22,14 @@ interface FileSystemItem {
 
 @Component({
   selector: 'app-home',
-  imports: [Win95IconComponent, Win95ModalComponent, Win95TaskbarComponent],
+  imports: [BootScreenComponent, Win95IconComponent, Win95ModalComponent, Win95TaskbarComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
   private router = inject(Router);
   private windowManager = inject(WindowManagerService);
+  private bootService = inject(BootService);
 
   protected title = 'landing-page-old-school';
   protected isMobile = this.detectMobile();
@@ -68,6 +71,7 @@ export class Home {
   protected openFolders = signal<Set<string>>(new Set());
   protected isImageModalOpen = signal<boolean>(false);
   protected selectedImage = signal<string>('');
+  protected showBootScreen = signal<boolean>(!this.bootService.hasBooted);
 
   protected get displayItems(): FileSystemItem[] {
     const openSet = this.openFolders();
@@ -179,5 +183,10 @@ export class Home {
       );
     }
     return false;
+  }
+
+  onBootComplete(): void {
+    this.bootService.markAsBooted();
+    this.showBootScreen.set(false);
   }
 }

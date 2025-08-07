@@ -1,0 +1,190 @@
+.boot-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: normal;
+  z-index: 99999;
+  cursor: pointer;
+  overflow: hidden;
+  
+  transition: opacity 0.8s ease-out;
+  
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.boot-content {
+  padding: 20px;
+  line-height: 1.4;
+}
+
+.bios-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+  
+  .bios-header-left {
+    flex: none;
+  }
+  
+  .bios-title {
+    color: #ffff00;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .copyright {
+    color: #ccc;
+    font-size: 13px;
+  }
+}
+
+.energy-star {
+  flex-shrink: 0;
+  
+  .energy-star-logo {
+    width: 180px;
+    height: auto;
+    opacity: 0.9;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+}
+
+.system-info {
+  margin-bottom: 25px;
+  
+  .memory-line {
+    margin-bottom: 8px;
+    
+    .address {
+      color: #ccc;
+      margin-right: 15px;
+    }
+    
+    .version {
+      color: #ccc;
+    }
+  }
+  
+  .cpu-info {
+    margin-bottom: 8px;
+    
+    .bus-info {
+      color: #ccc;
+    }
+  }
+  
+  .memory-test {
+    color: #ccc;
+    
+    .test-result {
+      color: #00ff00;
+      font-weight: bold;
+    }
+  }
+}
+
+.boot-lines {
+  margin-bottom: 30px;
+  min-height: 200px;
+  
+  .boot-line {
+    margin-bottom: 4px;
+    color: #ccc;
+    
+    &.typing {
+      .cursor {
+        color: #ffff00;
+        animation: blink 1s infinite;
+      }
+    }
+  }
+}
+
+.boot-instructions {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  
+  &.visible {
+    opacity: 1;
+  }
+  
+  .instruction-line {
+    margin-bottom: 8px;
+    color: #ccc;
+    
+    .key {
+      color: #ffff00;
+      font-weight: bold;
+      background: #333;
+      padding: 2px 4px;
+      border: 1px solid #666;
+    }
+    
+    .date {
+      color: #888;
+      font-size: 12px;
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+// Mobile adjustments
+@media (max-width: 768px) {
+  .boot-screen {
+    font-size: 12px;
+  }
+  
+  .boot-content {
+    padding: 15px;
+  }
+  
+  .bios-header {
+    flex-direction: column;
+    gap: 10px;
+    
+    .bios-header-left {
+      flex: none;
+    }
+  }
+  
+  .energy-star {
+    margin-left: 0;
+    align-self: flex-start;
+    
+    .energy-star-logo {
+      width: 120px;
+    }
+  }
+  
+  .boot-instructions {
+    bottom: 20px;
+    left: 15px;
+    
+    .instruction-line {
+      font-size: 11px;
+    }
+  }
+}

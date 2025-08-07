@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { WindowManagerService } from '../../../services/window-manager.service';
+import { SoundService } from '../../../services/sound.service';
 
 @Component({
   selector: 'app-win95-window',
@@ -44,6 +45,7 @@ export class Win95WindowComponent {
   
   private router = inject(Router);
   private windowManager = inject(WindowManagerService);
+  private soundService = inject(SoundService);
   
   // Animation state
   private minimizingState = signal(false);

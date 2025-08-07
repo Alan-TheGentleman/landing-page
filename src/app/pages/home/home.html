@@ -1,3 +1,9 @@
+<!-- Boot Screen -->
+@if(showBootScreen()) {
+  <app-boot-screen (bootComplete)="onBootComplete()"></app-boot-screen>
+}
+
+<!-- Desktop -->
 <div class="desktop-container">
   <div class="desktop-icons">
     @for(item of displayItems; track item.id) {

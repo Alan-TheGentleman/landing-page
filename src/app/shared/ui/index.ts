@@ -1,3 +1,4 @@
+export { BootScreenComponent } from './boot-screen/boot-screen';
 export { Button } from './button/button';
 export { Win95BackButtonComponent } from './win95-back-button/win95-back-button';
 export { Win95DesktopComponent } from './win95-desktop/win95-desktop';

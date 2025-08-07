@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   Button,
-  Win95BackButtonComponent,
   Win95GroupComponent,
   Win95HeaderComponent,
   Win95InfoBoxComponent,
@@ -17,7 +16,6 @@ import { Layout } from '@src/app/core/layout/layout';
     Win95GroupComponent,
     Win95HeaderComponent,
     Win95InfoBoxComponent,
-    Win95BackButtonComponent,
   ],
   templateUrl: './corporate-training.html',
   styleUrl: './corporate-training.scss',
@@ -27,7 +25,7 @@ export class CorporateTraining {
     {
       title: 'Frontend Excellence Program',
       description:
-        "Transform your team with Angular, React, and TypeScript training from a Google Developer Expert. Proven methods used by Fortune 500 companies, with 40% faster skill acquisition and immediate productivity gains.",
+        'Transform your team with Angular, React, and TypeScript training from a Google Developer Expert. Proven methods used by Fortune 500 companies, with 40% faster skill acquisition and immediate productivity gains.',
       approach: 'Enterprise-proven curriculum',
       teamSize: 'Teams of 5-50 developers',
       format: 'Intensive workshops + ongoing support',
@@ -43,7 +41,7 @@ export class CorporateTraining {
     {
       title: 'Full-Stack Transformation',
       description:
-        "Complete team upskilling from frontend to deployment. Microsoft MVP and Google GDE-led program covering modern development, database design, and production deployment with measurable ROI.",
+        'Complete team upskilling from frontend to deployment. Microsoft MVP and Google GDE-led program covering modern development, database design, and production deployment with measurable ROI.',
       approach: 'End-to-end expertise',
       teamSize: 'Cross-functional teams',
       format: 'Project-based learning',
@@ -51,7 +49,7 @@ export class CorporateTraining {
     {
       title: 'Architecture & Leadership',
       description:
-        "System design, clean code, testing strategies, and team leadership. Learn from someone who managed 50+ developers across Fortune 500 projects, with proven patterns for scalable architecture and team productivity.",
+        'System design, clean code, testing strategies, and team leadership. Learn from someone who managed 50+ developers across Fortune 500 projects, with proven patterns for scalable architecture and team productivity.',
       approach: 'Leadership + technical skills',
       teamSize: 'Senior developers & architects',
       format: 'Strategic workshops + coaching',

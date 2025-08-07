@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   Button,
-  Win95BackButtonComponent,
   Win95GroupComponent,
   Win95HeaderComponent,
   Win95InfoBoxComponent,
@@ -17,7 +16,6 @@ import { Layout } from '../../core/layout/layout';
     Win95GroupComponent,
     Win95HeaderComponent,
     Win95InfoBoxComponent,
-    Win95BackButtonComponent,
   ],
   templateUrl: './private-mentoring.html',
   styleUrl: './private-mentoring.scss',

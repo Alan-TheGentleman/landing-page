@@ -136,6 +136,25 @@
         background: $win95-navy;
         color: $win95-white;
       }
+      
+      &--clickable {
+        border: 1px solid transparent;
+        border-radius: 2px;
+        transition: all 0.1s ease;
+        
+        &:hover {
+          background: $win95-light-gray;
+          border: 1px outset $win95-gray;
+          color: $win95-black;
+        }
+        
+        &:active {
+          background: $win95-button-face;
+          border: 1px inset $win95-gray;
+          box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3);
+          transform: translate(1px, 1px);
+        }
+      }
     }
   }
 

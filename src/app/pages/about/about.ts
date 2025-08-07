@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {
   Button,
-  Win95BackButtonComponent,
   Win95GroupComponent,
   Win95InfoBoxComponent,
 } from '@shared/ui';
@@ -15,7 +14,6 @@ import { Layout } from '../../core/layout/layout';
     Button,
     Win95GroupComponent,
     Win95InfoBoxComponent,
-    Win95BackButtonComponent,
   ],
   templateUrl: './about.html',
   styleUrl: './about.scss',
