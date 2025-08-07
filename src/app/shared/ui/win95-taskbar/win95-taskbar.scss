@@ -1,0 +1,305 @@
+@use "../../../../styles/win95-variables" as *;
+
+.win95-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: $win95-gray;
+  border-top: 2px solid $win95-white;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  z-index: 10000;
+  user-select: none;
+
+  // Add subtle shadow for better contrast against background
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+
+  .start-button {
+    background: $win95-button-face;
+    border: none;
+    box-shadow: $win95-border-raised;
+    color: $win95-black;
+    font-family: $win95-font-family;
+    font-size: $win95-font-size;
+    font-weight: bold;
+    padding: 2px 6px;
+    width: auto;
+    height: 20px;
+    min-width: 40px; // Enough for "Start" text only
+    position: relative;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+
+    &:active {
+      box-shadow: $win95-border-sunken;
+      padding: 3px 1px 1px 3px;
+    }
+
+    &:focus {
+      outline: 1px dotted $win95-black;
+      outline-offset: -3px;
+    }
+
+    img {
+      width: 14px;
+      height: 12px;
+    }
+  }
+
+  .taskbar-divider {
+    width: 1px;
+    height: 22px;
+    background: $win95-dark-gray;
+    margin: 0 3px;
+    box-shadow: 1px 0 0 $win95-white;
+  }
+
+  .taskbar-windows {
+    flex: 1;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    min-width: 0; // Allow flexbox to shrink properly
+
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+
+  .taskbar-window {
+    @include win95-button;
+    min-width: 160px;
+    max-width: 160px;
+    height: 22px;
+    padding: 2px 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &.active {
+      box-shadow: $win95-border-sunken;
+      background: pattern($win95-white, $win95-gray);
+      font-weight: bold;
+    }
+
+    &.minimized {
+      font-style: italic;
+      color: $win95-dark-gray;
+      background: $win95-light-gray;
+    }
+  }
+
+  .window-icon {
+    font-size: 14px;
+  }
+
+  .window-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+  }
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  height: 24px;
+  border: 1px inset $win95-gray;
+  background: $win95-white;
+  flex-shrink: 0; // Prevent tray from shrinking
+  margin-left: auto; // Push to the right
+
+  .tray-icons {
+    display: flex;
+    gap: 3px;
+    padding-right: 4px;
+    border-right: 1px solid $win95-gray;
+
+    .tray-icon {
+      font-size: 12px;
+      cursor: pointer;
+      padding: 2px;
+
+      &:hover {
+        background: $win95-navy;
+        color: $win95-white;
+      }
+    }
+  }
+
+  .taskbar-clock {
+    font-size: $win95-font-size;
+    padding: 2px 6px;
+    min-width: 70px;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.start-menu {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 280px;
+  background: $win95-gray;
+  border: 2px solid;
+  border-color: $win95-white $win95-black $win95-black $win95-white;
+  box-shadow: 2px -2px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+
+  .start-menu-sidebar {
+    width: 30px;
+    background: linear-gradient(180deg, $win95-teal, $win95-navy);
+    color: $win95-white;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 6px 3px;
+    font-weight: bold;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .start-menu-content {
+    flex: 1;
+    padding: 3px;
+  }
+
+  .start-menu-item {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: $win95-font-size;
+    border: 1px solid transparent;
+
+    &:hover {
+      background: $win95-navy;
+      color: $win95-white;
+      border: 1px dotted $win95-white;
+    }
+
+    .menu-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+  }
+
+  .start-menu-separator {
+    height: 1px;
+    background: $win95-dark-gray;
+    margin: 3px 6px;
+    box-shadow: 0 1px 0 $win95-white;
+  }
+}
+
+@function pattern($color1, $color2) {
+  @return repeating-linear-gradient(
+    45deg,
+    $color1,
+    $color1 1px,
+    $color2 1px,
+    $color2 2px
+  );
+}
+
+@media (max-width: 768px) {
+  .win95-taskbar {
+    height: 32px;
+
+    .taskbar-windows {
+      display: flex;
+      flex: 1;
+      gap: 1px;
+      overflow-x: auto;
+      
+      &::-webkit-scrollbar {
+        height: 0;
+      }
+    }
+    
+    .taskbar-window {
+      min-width: 120px;
+      max-width: 120px;
+      height: 20px;
+      padding: 1px 4px;
+      font-size: 10px;
+      
+      .window-icon {
+        font-size: 12px;
+      }
+      
+      .window-title {
+        font-size: 9px;
+      }
+    }
+
+    .start-button {
+      width: auto;
+      height: 18px;
+      min-width: 35px; // Enough for "Start" text on mobile
+      padding: 2px 4px;
+      flex-shrink: 0;
+    }
+
+    .taskbar-tray {
+      height: 20px;
+      padding: 0 2px;
+      margin-left: auto; // Ensure it stays on the right
+      flex-shrink: 0;
+
+      .tray-icons {
+        gap: 1px;
+        padding-right: 3px;
+
+        .tray-icon {
+          font-size: 11px;
+          padding: 1px;
+        }
+      }
+
+      .taskbar-clock {
+        min-width: 65px;
+        font-size: 10px;
+        padding: 1px 4px;
+      }
+    }
+  }
+
+  .start-menu {
+    width: 250px;
+    bottom: 32px;
+
+    .start-menu-sidebar {
+      width: 28px;
+      font-size: 11px;
+    }
+
+    .start-menu-item {
+      padding: 6px 10px;
+      font-size: 10px;
+
+      .menu-icon {
+        font-size: 14px;
+        width: 18px;
+      }
+    }
+  }
+}

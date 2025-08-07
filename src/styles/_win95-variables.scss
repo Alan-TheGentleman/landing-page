@@ -1,0 +1,163 @@
+// Windows 95 Design System Variables
+// Centralized styling for authentic Windows 95 look
+
+// Colors
+$win95-teal: #008080;
+$win95-gray: #c0c0c0;
+$win95-dark-gray: #808080;
+$win95-light-gray: #dfdfdf;
+$win95-white: #ffffff;
+$win95-black: #000000;
+$win95-navy: #000080;
+$win95-blue: #0000ff;
+$win95-highlight: #000080;
+$win95-highlight-text: #ffffff;
+$win95-window-frame: #c0c0c0;
+$win95-button-face: #c0c0c0;
+$win95-button-highlight: #ffffff;
+$win95-button-shadow: #808080;
+$win95-button-dark-shadow: #000000;
+$win95-desktop: #008080;
+$win95-title-active: #000080;
+$win95-title-inactive: #808080;
+$win95-title-gradient-start: #000080;
+$win95-title-gradient-end: #1084d0;
+
+// Fonts
+$win95-font-family: "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+$win95-font-size: 11px;
+$win95-font-size-small: 10px;
+$win95-font-size-large: 12px;
+$win95-line-height: 1.3;
+
+// Spacing
+$win95-spacing-xs: 2px;
+$win95-spacing-sm: 4px;
+$win95-spacing-md: 8px;
+$win95-spacing-lg: 16px;
+
+// Borders & Effects
+$win95-border-width: 2px;
+$win95-border-raised: inset -1px -1px #000000, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+$win95-border-sunken: inset -1px -1px #ffffff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #000000;
+$win95-border-window: inset -1px -1px #000000, inset 1px 1px #ffffff;
+$win95-border-button-default: inset -1px -1px #000000, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+
+// Mixins
+@mixin win95-button {
+  background: $win95-button-face;
+  border: none;
+  box-shadow: $win95-border-raised;
+  color: $win95-black;
+  font-family: $win95-font-family;
+  font-size: $win95-font-size;
+  padding: $win95-spacing-sm $win95-spacing-md;
+  min-width: 75px;
+  min-height: 23px;
+  position: relative;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+
+  &:active {
+    box-shadow: $win95-border-sunken;
+    padding: 5px 7px 3px 9px;
+  }
+
+  &:focus {
+    outline: 1px dotted $win95-black;
+    outline-offset: -4px;
+  }
+
+  &:disabled {
+    color: $win95-dark-gray;
+    text-shadow: 1px 1px 0 $win95-white;
+  }
+}
+
+@mixin win95-window {
+  background: $win95-window-frame;
+  border: $win95-border-width solid;
+  border-color: $win95-light-gray $win95-black $win95-black $win95-light-gray;
+  box-shadow: inset 1px 1px 0 $win95-white, inset -1px -1px 0 $win95-dark-gray;
+  padding: $win95-spacing-xs;
+}
+
+@mixin win95-title-bar {
+  background: linear-gradient(90deg, $win95-title-gradient-start, $win95-title-gradient-end);
+  color: $win95-white;
+  font-family: $win95-font-family;
+  font-size: $win95-font-size;
+  font-weight: bold;
+  padding: $win95-spacing-xs $win95-spacing-sm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 18px;
+  user-select: none;
+}
+
+@mixin win95-inset-box {
+  background: $win95-white;
+  border: 2px inset $win95-window-frame;
+  padding: $win95-spacing-sm;
+}
+
+@mixin win95-text {
+  color: $win95-black;
+  font-family: $win95-font-family;
+  font-size: $win95-font-size;
+  line-height: $win95-line-height;
+}
+
+@mixin win95-scrollbar {
+  &::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $win95-white;
+    border: 1px solid $win95-gray;
+    box-shadow: inset 1px 1px 0 $win95-gray;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $win95-gray;
+    border: 1px solid;
+    border-color: $win95-white $win95-black $win95-black $win95-white;
+    box-shadow: inset 1px 1px 0 $win95-light-gray, inset -1px -1px 0 $win95-dark-gray;
+  }
+
+  &::-webkit-scrollbar-button {
+    background: $win95-gray;
+    border: 1px solid;
+    border-color: $win95-white $win95-black $win95-black $win95-white;
+    box-shadow: inset 1px 1px 0 $win95-light-gray, inset -1px -1px 0 $win95-dark-gray;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// Window control buttons (minimize, maximize, close)
+@mixin win95-window-button {
+  width: 16px;
+  height: 14px;
+  background: $win95-button-face;
+  border: 1px solid;
+  border-color: $win95-white $win95-black $win95-black $win95-white;
+  box-shadow: inset 1px 1px 0 $win95-light-gray, inset -1px -1px 0 $win95-dark-gray;
+  padding: 0;
+  margin: 0 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Marlett", $win95-font-family;
+  font-size: 10px;
+  cursor: pointer;
+
+  &:active {
+    border-color: $win95-black $win95-white $win95-white $win95-black;
+    box-shadow: inset 1px 1px 0 $win95-dark-gray;
+  }
+}

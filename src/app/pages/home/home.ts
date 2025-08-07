@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  Win95DesktopComponent,
   Win95IconComponent,
   Win95ModalComponent,
+  Win95TaskbarComponent,
 } from '@shared/ui';
-import { Layout } from '@src/app/core/layout/layout';
+import { WindowManagerService } from '../../services/window-manager.service';
 
 interface FileSystemItem {
   id: string;
@@ -20,19 +20,16 @@ interface FileSystemItem {
 
 @Component({
   selector: 'app-home',
-  imports: [
-    Layout,
-    Win95DesktopComponent,
-    Win95IconComponent,
-    Win95ModalComponent,
-  ],
+  imports: [Win95IconComponent, Win95ModalComponent, Win95TaskbarComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
   private router = inject(Router);
+  private windowManager = inject(WindowManagerService);
 
   protected title = 'landing-page-old-school';
+  protected isMobile = this.detectMobile();
 
   private fileSystem: FileSystemItem[] = [
     {
@@ -91,13 +88,55 @@ export class Home {
       (item) => item.type !== 'folder' || !openSet.has(item.id)
     );
   }
+  onItemClick(item: FileSystemItem): void {
+    // En mobile usa single click, en desktop double click
+    if (this.isMobile) {
+      this.handleItemAction(item);
+    }
+  }
+
   onItemDoubleClick(item: FileSystemItem): void {
+    // Solo en desktop
+    if (!this.isMobile) {
+      this.handleItemAction(item);
+    }
+  }
+
+  private handleItemAction(item: FileSystemItem): void {
     if (item.type === 'folder') {
       this.toggleFolder(item.id);
     } else if (item.type === 'image') {
       this.selectedImage.set(item.image || '');
       this.isImageModalOpen.set(true);
     } else if (item.route) {
+      // Define window configurations for .bat files
+      const windowConfigs = {
+        '/private-mentoring': {
+          id: 'private-mentoring',
+          title: 'Private Mentoring Sessions',
+          icon: '👨‍🏫',
+          route: '/private-mentoring'
+        },
+        '/corporate-training': {
+          id: 'corporate-training', 
+          title: 'Corporate Training Programs',
+          icon: '🏢',
+          route: '/corporate-training'
+        },
+        '/about': {
+          id: 'about',
+          title: 'About - Gentleman Programming',
+          icon: '👤',
+          route: '/about'
+        }
+      };
+      
+      const windowConfig = windowConfigs[item.route as keyof typeof windowConfigs];
+      
+      if (windowConfig) {
+        this.windowManager.openWindow(windowConfig);
+      }
+      
       this.router.navigate([item.route]);
     }
   }
@@ -120,6 +159,25 @@ export class Home {
     this.selectedImage.set('');
   }
   navigateTo(route: string): void {
+    // If navigating to home, close all windows
+    if (route === '/home') {
+      const openWindows = this.windowManager.openWindows();
+      openWindows.forEach(window => {
+        this.windowManager.closeWindow(window.id);
+      });
+    }
+    
     this.router.navigate([route]);
+  }
+
+  private detectMobile(): boolean {
+    if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
+      return (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        ) || window.innerWidth <= 768
+      );
+    }
+    return false;
   }
 }

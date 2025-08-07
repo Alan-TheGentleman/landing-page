@@ -1,0 +1,257 @@
+@use '../../../../styles/win95-variables' as *;
+
+.win95-window {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: calc(100vw - 120px);
+  height: calc(100vh - 120px);
+  max-width: 1200px;
+  max-height: 800px;
+  
+  background: $win95-gray;
+  border: 2px outset $win95-gray;
+  
+  display: flex;
+  flex-direction: column;
+  
+  filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.3));
+  
+  transition: all 0.15s ease-in-out;
+}
+
+// Minimizing animation - shrink towards taskbar
+.win95-window--minimizing {
+  animation: minimizeToTaskbar 0.3s ease-in-out forwards;
+  pointer-events: none;
+}
+
+// Minimized state - hide window completely
+.win95-window--minimized {
+  display: none;
+}
+
+// Maximized state - full screen
+.win95-window--maximized {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 30px); // Leave space for taskbar
+  max-width: none;
+  max-height: none;
+}
+
+// Keyframes for minimize animation
+@keyframes minimizeToTaskbar {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(0.9) translateY(5%);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(0.3) translateY(50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.05) translateY(90%);
+    opacity: 0;
+  }
+}
+
+// Restore animation automatically when window becomes visible
+.win95-window:not(.win95-window--minimized):not(.win95-window--minimizing) {
+  animation: restoreFromTaskbar 0.25s ease-out;
+}
+
+@keyframes restoreFromTaskbar {
+  0% {
+    transform: scale(0.95) translateY(-10%);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.02) translateY(-2%);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+// Remove the restoring state - we'll use automatic CSS animation
+.win95-window--restoring {
+  /* Remove this as we're using automatic animation */
+}
+
+.win95-window__titlebar {
+  background: linear-gradient(90deg, $win95-title-gradient-start, $win95-title-gradient-end);
+  color: $win95-white;
+  height: 18px;
+  padding: 2px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  user-select: none;
+  cursor: move;
+}
+
+.win95-window__title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.win95-window__icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.win95-window__title-text {
+  font-family: $win95-font-family;
+  font-size: $win95-font-size;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.win95-window__controls {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.win95-window__control {
+  // Override global button styles
+  width: 16px;
+  height: 14px;
+  min-width: 16px;
+  min-height: 14px;
+  max-width: 16px;
+  max-height: 14px;
+  
+  background: $win95-button-face;
+  border: 1px solid;
+  border-color: $win95-button-highlight $win95-button-shadow $win95-button-shadow $win95-button-highlight;
+  box-shadow: inset 1px 1px 0 $win95-light-gray, inset -1px -1px 0 $win95-dark-gray;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-family: $win95-font-family;
+  font-size: 8px;
+  color: $win95-black;
+  font-weight: normal;
+  text-align: center;
+  
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  
+  // Override any inherited button styles
+  outline: none;
+  text-decoration: none;
+  
+  &:active {
+    border-color: $win95-button-shadow $win95-button-highlight $win95-button-highlight $win95-button-shadow;
+    box-shadow: inset 1px 1px 0 $win95-dark-gray;
+    padding: 1px 0 0 1px;
+  }
+  
+  &:focus {
+    outline: none;
+  }
+  
+  &--minimize span {
+    font-size: 8px;
+    line-height: 1;
+    position: relative;
+    top: -2px;
+    font-weight: bold;
+  }
+  
+  &--maximize span {
+    font-size: 7px;
+    line-height: 1;
+    font-weight: bold;
+  }
+  
+  &--close {
+    span {
+      font-size: 7px;
+      font-weight: bold;
+      line-height: 1;
+    }
+    
+    &:hover {
+      background: #c13030;
+      color: white;
+      border-color: #c13030 #c13030 #c13030 #c13030;
+    }
+  }
+  
+  span {
+    pointer-events: none;
+    line-height: 1;
+    user-select: none;
+    display: block;
+  }
+}
+
+.win95-window__content {
+  flex: 1;
+  background: $win95-gray;
+  overflow: auto;
+  
+  padding: 8px;
+  
+  @include win95-scrollbar;
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .win95-window {
+    top: 10px;
+    left: 10px;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 60px);
+    max-width: none;
+    max-height: none;
+  }
+  
+  .win95-window--maximized {
+    height: calc(100vh - 32px); // Account for larger mobile taskbar
+  }
+  
+  .win95-window__title-text {
+    font-size: 10px;
+  }
+  
+  // Adjust minimize animation for mobile
+  @keyframes minimizeToTaskbar {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    30% {
+      transform: scale(0.9) translateY(10%);
+      opacity: 0.9;
+    }
+    70% {
+      transform: scale(0.2) translateY(60%);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(0.02) translateY(95%);
+      opacity: 0;
+    }
+  }
+}

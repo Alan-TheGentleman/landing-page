@@ -1,19 +1,6 @@
-<app-card>
-  <div class="title-bar">
-    <div class="title-container">
-      <i>🖥️</i>
-      <span>Gentleman Programming</span>
-    </div>
-    <div class="button-container">
-      <app-button>-</app-button>
-      <app-button><div class="block"></div></app-button>
-      <app-button>X</app-button>
-    </div>
-  </div>
-  <div class="container">
-    <app-sidebar />
-    <div class="layout-container">
-      <ng-content />
-    </div>
-  </div>
-</app-card>
+<div class="layout-desktop">
+  <app-win95-window title="Gentleman Programming - Professional Services" icon="💻">
+    <ng-content />
+  </app-win95-window>
+  <app-win95-taskbar></app-win95-taskbar>
+</div>

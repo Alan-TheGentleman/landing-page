@@ -1,12 +1,13 @@
 <app-layout>
   <div class="mentoring-container">
-    <app-win95-back-button></app-win95-back-button>
-    <app-card title="Private Mentoring Sessions" class="main-card">
+    <div class="main-card mentoring-content">
+      <h1 class="page-title">1-on-1 Mentoring Sessions</h1>
+      
       <app-win95-group>
         <h2 class="win95-title">Personalized 1-on-1 Mentoring</h2>
         <app-win95-info-box>
-          <p class="win95-text">Get personalized guidance from an experienced developer who has worked with leading tech companies. 
-             Each session is tailored to your specific needs and career goals.</p>
+          <p class="win95-text">Get personalized guidance tailored specifically to your needs. 
+             No fixed curriculum, no preset timelines - every session is designed around your current challenges, goals, and projects.</p>
         </app-win95-info-box>
       </app-win95-group>
       
@@ -18,11 +19,8 @@
               <div class="session-content">
                 <p class="description win95-text">{{session.description}}</p>
                 <div class="session-details win95-details">
-                  <span class="duration win95-label">Duration: {{session.duration}}</span>
-                  <span class="price win95-price">{{session.price}}</span>
-                </div>
-                <div class="session-actions">
-                  <app-button>Book Session</app-button>
+                  <span class="approach win95-label">{{session.approach}}</span>
+                  <span class="format win95-text">{{session.format}}</span>
                 </div>
               </div>
             </div>
@@ -34,10 +32,10 @@
         <app-win95-info-box>
           <p class="win95-text">Contact me to discuss your goals and customize a mentoring plan that fits your needs.</p>
           <div class="contact-actions win95-button-group">
-            <app-button>Contact Me</app-button>
+            <app-button (click)="openContact()">Contact Me</app-button>
           </div>
         </app-win95-info-box>
       </app-win95-group>
-    </app-card>
+    </div>
   </div>
 </app-layout>

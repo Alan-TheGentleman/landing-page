@@ -42,39 +42,53 @@
 .programs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 8px;
+  gap: 12px;
   margin-top: 8px;
 }
 
 .program-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
   .program-content {
     padding: 8px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    flex: 1;
 
     .description {
       flex-grow: 1;
+      min-height: 60px;
     }
 
     .program-details {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 4px;
+      margin-top: auto;
 
       .detail-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem;
+        padding: 6px 8px;
         border: 1px inset #c0c0c0;
         background-color: white;
-      }
-    }
+        min-height: 32px;
 
-    .program-actions {
-      margin-top: 8px;
-      text-align: center;
+        .label {
+          font-weight: bold;
+          flex-shrink: 0;
+          min-width: 80px;
+        }
+
+        .value {
+          text-align: right;
+          flex: 1;
+        }
+      }
     }
   }
 }

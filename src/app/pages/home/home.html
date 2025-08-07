@@ -1,15 +1,15 @@
-<app-layout>
-  <div class="home-container">
-    <app-win95-desktop>
-      @for(item of displayItems; track item.id) {
-        <app-win95-icon 
-          [type]="item.type"
-          [title]="item.title" 
-          [image]="item.image"
-          (doubleClicked)="onItemDoubleClick(item)">
-        </app-win95-icon>
-      }
-    </app-win95-desktop>
+<div class="desktop-container">
+  <div class="desktop-icons">
+    @for(item of displayItems; track item.id) {
+      <app-win95-icon 
+        [type]="item.type"
+        [title]="item.title" 
+        [image]="item.image"
+        [class]="'desktop-icon icon-' + item.id"
+        (clicked)="onItemClick(item)"
+        (doubleClicked)="onItemDoubleClick(item)">
+      </app-win95-icon>
+    }
   </div>
 
   <app-win95-modal 
@@ -18,4 +18,6 @@
     (closeModal)="closeImageModal()">
     <img [src]="selectedImage()" alt="About Me" style="max-width: 100%; height: auto; border: 1px inset #c0c0c0;">
   </app-win95-modal>
-</app-layout>
+  
+  <app-win95-taskbar></app-win95-taskbar>
+</div>

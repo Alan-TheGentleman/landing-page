@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Button, Card } from '@shared/ui';
-import { Sidebar } from '../sidebar/sidebar';
+import { Win95TaskbarComponent, Win95WindowComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-layout',
-  imports: [Card, Sidebar, Button],
+  imports: [Win95WindowComponent, Win95TaskbarComponent],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })

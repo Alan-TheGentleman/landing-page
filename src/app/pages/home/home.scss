@@ -1,5 +1,138 @@
-// Windows 95 Home Page Styles
-.home-container {
-  height: 100%;
-  width: 100%;
+@use '../../../styles/win95-variables' as *;
+
+.desktop-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+  // Full desktop background
+  background: transparent;
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 30px; // Leave space for taskbar
+  padding: 20px;
+  
+  // Grid layout for icons
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-template-rows: repeat(auto-fill, 100px);
+  gap: 20px;
+  align-content: start;
+  justify-content: start;
+}
+
+// Override win95-icon styles for desktop mode
+::ng-deep .desktop-icon {
+  // Remove default win95-icon hover and selected styles
+  .win95-icon {
+    // Remove the default styles, we'll handle them here
+    &:hover {
+      background: rgba(0, 0, 128, 0.3) !important;
+      border: 2px dotted rgba(255, 255, 255, 0.8) !important;
+    }
+    
+    &--selected {
+      background: rgba(0, 0, 128, 0.6) !important;
+      border: 2px dotted white !important;
+    }
+    
+    // Override label styles for desktop
+    .win95-icon__label {
+      background: transparent !important;
+      color: white !important;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+    }
+    
+    // When hovering, update label
+    &:hover .win95-icon__label {
+      background: rgba(0, 0, 128, 0.8) !important;
+      color: white !important;
+      padding: 1px 3px !important;
+    }
+    
+    // When selected, update label  
+    &--selected .win95-icon__label {
+      background: rgba(0, 0, 128, 0.9) !important;
+      color: white !important;
+      padding: 1px 3px !important;
+    }
+  }
+}
+
+// Specific positioning for each icon (like a real desktop)
+::ng-deep .icon-mentoring {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+::ng-deep .icon-about {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+// Add more specific positions as needed
+::ng-deep .icon-private-mentoring {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+::ng-deep .icon-corporate-training {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .desktop-icons {
+    padding: 15px;
+    bottom: 35px; // Account for larger mobile taskbar
+    grid-template-columns: repeat(auto-fill, 70px);
+    grid-template-rows: repeat(auto-fill, 85px);
+    gap: 15px;
+  }
+  
+  ::ng-deep .desktop-icon {
+    padding: 6px;
+    
+    .icon-text {
+      font-size: 10px;
+      max-width: 60px;
+    }
+    
+    .icon-image {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .desktop-icons {
+    grid-template-columns: repeat(auto-fill, 65px);
+    grid-template-rows: repeat(auto-fill, 80px);
+    gap: 12px;
+    padding: 10px;
+  }
+  
+  ::ng-deep .desktop-icon {
+    .icon-text {
+      font-size: 9px;
+      max-width: 55px;
+    }
+    
+    .icon-image {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

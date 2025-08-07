@@ -1,25 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+/* Windows 95 Design System - Global Styles */
+@use 'styles/win95-variables' as *;
+
+/* Base Styles */
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-image: url("/background.jpg");
+  @include win95-text;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: $win95-desktop url('/background.jpg') center center;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   background-attachment: fixed;
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  color: #000000;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-  image-rendering: -webkit-crisp-edges;
+  background-repeat: no-repeat;
+  overflow: auto;
+  @include win95-scrollbar;
+  
+  // Add subtle overlay to maintain Windows 95 aesthetic
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($win95-desktop, 0.15);
+    pointer-events: none;
+    z-index: -1;
+  }
 }
 
 * {
-  font-family: "MS Sans Serif", sans-serif;
+  box-sizing: border-box;
+  font-family: $win95-font-family;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -29,180 +45,226 @@ body {
   -moz-osx-font-smoothing: unset;
 }
 
-h1 {
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $win95-font-family;
   font-weight: bold;
+  margin: 0 0 $win95-spacing-sm 0;
+}
+
+h1 {
   font-size: 16px;
-  margin: 0 0 8px 0;
 }
 
 h2 {
-  font-weight: bold;
   font-size: 14px;
-  margin: 0 0 6px 0;
 }
 
 h3 {
-  font-weight: bold;
   font-size: 12px;
-  margin: 0 0 4px 0;
 }
 
 h4, h5, h6 {
-  font-weight: bold;
-  font-size: 11px;
-  margin: 0 0 2px 0;
+  font-size: $win95-font-size;
 }
 
 p {
-  font-size: 11px;
-  line-height: 1.2;
-  margin: 0 0 4px 0;
+  @include win95-text;
+  margin: 0 0 $win95-spacing-sm 0;
 }
 
-button,
-input,
-select,
-textarea {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
+a {
+  color: $win95-navy;
+  text-decoration: underline;
+  
+  &:hover {
+    color: $win95-blue;
+  }
 }
 
-html,
-body {
-  height: 100%;
+/* Form Elements */
+button {
+  @include win95-button;
 }
 
-/* Windows 95 specific typography */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+  @include win95-inset-box;
+  @include win95-text;
+  border: 2px inset $win95-window-frame;
+  
+  &:focus {
+    outline: none;
+    background: $win95-highlight-text;
+  }
+}
+
+/* Utility Classes */
+.win95-window {
+  @include win95-window;
+}
+
+.win95-title-bar {
+  @include win95-title-bar;
+}
+
+.win95-inset {
+  @include win95-inset-box;
+}
+
+.win95-raised {
+  box-shadow: $win95-border-raised;
+  background: $win95-gray;
+}
+
+.win95-sunken {
+  box-shadow: $win95-border-sunken;
+  background: $win95-white;
+}
+
+/* Common Win95 Components */
+.win95-desktop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.win95-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: $win95-gray;
+  border-top: 2px solid $win95-white;
+  box-shadow: inset 0 1px 0 $win95-light-gray;
+  display: flex;
+  align-items: center;
+  padding: $win95-spacing-xs $win95-spacing-sm;
+  z-index: 10000;
+}
+
+// Removed obsolete win95-start-button class - using component-specific styles instead
+
 .win95-title {
-  font-size: 11px;
+  font-size: $win95-font-size;
   font-weight: bold;
-  color: #000080;
+  color: $win95-navy;
+  margin: 0 0 $win95-spacing-md 0;
 }
 
 .win95-text {
-  font-size: 11px;
-  line-height: 1.2;
-  color: #000000;
-}
-
-.win95-small {
-  font-size: 9px;
-  line-height: 1.1;
-}
-
-.win95-button-text {
-  font-size: 11px;
-  font-weight: normal;
-}
-
-/* Common Win95 Styles */
-.win95-group {
-  background-color: #c0c0c0;
-  border: 2px outset #c0c0c0;
-  padding: 8px;
-  margin-bottom: 16px;
-}
-
-.win95-title {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  color: #000080;
-  margin: 0 0 8px 0;
-  text-transform: uppercase;
-}
-
-.section-header {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  color: white;
-  margin: 0 0 8px 0;
-  background-color: #000080;
-  padding: 0.5rem;
-  border: 1px outset #c0c0c0;
-  text-align: center;
-}
-
-.win95-header {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  color: white;
-  background-color: #000080;
-  padding: 0.5rem;
-  border: 1px outset #c0c0c0;
-  margin-bottom: 4px;
-}
-
-.win95-text {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  color: #000000;
-  line-height: 1.3;
-  margin: 0;
+  @include win95-text;
 }
 
 .win95-label {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
+  font-size: $win95-font-size;
   font-weight: bold;
-  color: #000000;
+  color: $win95-black;
 }
 
-.win95-link {
-  font-family: "MS Sans Serif", sans-serif;
-  font-size: 11px;
-  color: #000080;
-  text-decoration: underline;
-}
-
-.win95-card {
-  background-color: white;
-  border: 2px inset #c0c0c0;
-  margin-bottom: 8px;
-  flex: 1;
+.win95-group {
+  background: $win95-gray;
+  border: 2px groove $win95-window-frame;
+  padding: $win95-spacing-md;
+  margin-bottom: $win95-spacing-lg;
+  position: relative;
+  
+  &[title]::before {
+    content: attr(title);
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    background: $win95-gray;
+    padding: 0 $win95-spacing-sm;
+    font-size: $win95-font-size;
+    font-weight: bold;
+  }
 }
 
 .win95-listbox {
-  background-color: white;
-  border: 2px inset #c0c0c0;
-  padding: 4px;
+  @include win95-inset-box;
+  @include win95-scrollbar;
+  overflow: auto;
+  max-height: 200px;
 }
 
 .win95-button-group {
   display: flex;
-  gap: 8px;
+  gap: $win95-spacing-md;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: $win95-spacing-md;
 }
 
 .win95-details {
-  background-color: #c0c0c0;
-  border: 1px inset #c0c0c0;
-  padding: 4px;
-  margin: 4px 0;
+  background: $win95-white;
+  border: 1px inset $win95-gray;
+  padding: $win95-spacing-sm;
+  margin: $win95-spacing-sm 0;
+  display: flex;
+  gap: $win95-spacing-md;
+  align-items: center;
+}
+
+/* Window Components */
+.win95-window-controls {
+  display: flex;
+  gap: 2px;
+  
+  button {
+    @include win95-window-button;
+    
+    &.minimize::after { content: '_'; }
+    &.maximize::after { content: '□'; }
+    &.close {
+      background: $win95-gray;
+      &::after { content: '×'; }
+    }
+  }
+}
+
+/* Status Bar */
+.win95-status-bar {
+  background: $win95-gray;
+  border-top: 1px solid $win95-white;
+  padding: $win95-spacing-xs $win95-spacing-sm;
+  font-size: $win95-font-size;
+  display: flex;
+  gap: $win95-spacing-lg;
+  
+  .status-section {
+    border: 1px inset $win95-gray;
+    padding: 1px $win95-spacing-sm;
+    flex: 1;
+  }
 }
 
 /* Common container styles */
 .page-container {
-  padding: 8px;
-
+  padding: $win95-spacing-md;
+  height: 100%;
+  overflow: auto;
+  @include win95-scrollbar;
+  
   .main-card {
     max-width: 1200px;
     margin: 0 auto;
   }
 }
 
-/* Common image styles */
+/* Image styles */
 .image-frame {
-  border: 2px inset #c0c0c0;
+  border: 2px inset $win95-gray;
   padding: 2px;
-  background-color: #c0c0c0;
+  background: $win95-gray;
 }
 
 .pixelated {
@@ -212,21 +274,48 @@ body {
   filter: contrast(1.2) saturate(1.1);
 }
 
-/* Common info box styles */
-.info-box {
-  background-color: white;
-  border: 2px inset #c0c0c0;
-  padding: 8px;
-  margin-top: 8px;
-}
-
+/* Responsive */
 @media (width < 960px) {
-  body {
-    justify-content: flex-start;
-  }
-
   .win95-button-group {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    
+    button {
+      width: 100%;
+    }
+  }
+  
+  .win95-desktop {
+    bottom: 35px;
+  }
+  
+  .win95-taskbar {
+    height: 35px;
+  }
+  
+  // Adjust background for mobile
+  body {
+    background-size: cover;
+    background-position: center center;
+    
+    &::before {
+      background: rgba($win95-desktop, 0.25);
+    }
+  }
+}
+
+@media (width < 768px) {
+  body {
+    // Stronger overlay on smaller screens for better readability
+    &::before {
+      background: rgba($win95-desktop, 0.35);
+    }
+  }
+}
+
+@media (width > 1920px) {
+  body {
+    // Ensure background covers large screens
+    background-size: 100% 100%;
   }
 }

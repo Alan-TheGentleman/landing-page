@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import {
   Button,
-  Card,
+  Win95BackButtonComponent,
   Win95GroupComponent,
   Win95HeaderComponent,
   Win95InfoBoxComponent,
-  Win95BackButtonComponent,
 } from '@shared/ui';
 import { Layout } from '@src/app/core/layout/layout';
 
@@ -14,7 +13,6 @@ import { Layout } from '@src/app/core/layout/layout';
   standalone: true,
   imports: [
     Button,
-    Card,
     Layout,
     Win95GroupComponent,
     Win95HeaderComponent,
@@ -27,37 +25,51 @@ import { Layout } from '@src/app/core/layout/layout';
 export class CorporateTraining {
   protected trainingPrograms = [
     {
-      title: 'Modern Frontend Stack',
+      title: 'Frontend Excellence Program',
       description:
-        'Comprehensive training on Angular, React, TypeScript, and modern development practices.',
-      duration: '2-3 months',
-      teamSize: '5-20 developers',
-      format: 'Hybrid (Online + On-site)',
+        "Transform your team with Angular, React, and TypeScript training from a Google Developer Expert. Proven methods used by Fortune 500 companies, with 40% faster skill acquisition and immediate productivity gains.",
+      approach: 'Enterprise-proven curriculum',
+      teamSize: 'Teams of 5-50 developers',
+      format: 'Intensive workshops + ongoing support',
     },
     {
-      title: 'Backend & DevOps',
+      title: 'Backend & DevOps Mastery',
       description:
-        'Node.js, microservices architecture, Docker, Kubernetes, and CI/CD best practices.',
-      duration: '3-4 months',
-      teamSize: '5-15 developers',
-      format: 'Flexible delivery',
+        'Build scalable systems with Node.js, microservices, Docker, and Kubernetes. Learn from real $10M+ projects, with architecture patterns that handle millions of users and enterprise-grade deployment strategies.',
+      approach: 'Real-world case studies',
+      teamSize: 'Technical teams of any size',
+      format: 'Hands-on labs + mentorship',
     },
     {
-      title: 'Full-Stack Bootcamp',
+      title: 'Full-Stack Transformation',
       description:
-        'Complete training program covering frontend, backend, databases, and deployment.',
-      duration: '4-6 months',
-      teamSize: '10-30 developers',
-      format: 'On-site intensive',
+        "Complete team upskilling from frontend to deployment. Microsoft MVP and Google GDE-led program covering modern development, database design, and production deployment with measurable ROI.",
+      approach: 'End-to-end expertise',
+      teamSize: 'Cross-functional teams',
+      format: 'Project-based learning',
+    },
+    {
+      title: 'Architecture & Leadership',
+      description:
+        "System design, clean code, testing strategies, and team leadership. Learn from someone who managed 50+ developers across Fortune 500 projects, with proven patterns for scalable architecture and team productivity.",
+      approach: 'Leadership + technical skills',
+      teamSize: 'Senior developers & architects',
+      format: 'Strategic workshops + coaching',
     },
   ];
 
   protected benefits = [
-    'Customized curriculum for your tech stack',
-    'Hands-on projects with real business scenarios',
-    'Code review sessions and best practices',
-    'Ongoing support and mentorship',
-    'Performance metrics and progress tracking',
-    'Certificate of completion',
+    'Google GDE & Microsoft MVP expertise - Learn from dual tech giant recognition',
+    'Enterprise-proven methods - Used successfully in Fortune 500 companies',
+    'Measurable ROI - 40% faster skill development with immediate productivity gains',
+    'Real project experience - Work with patterns from $10M+ enterprise applications',
+    'Ongoing mentorship - Continued support from 200K+ community leader',
+    'Certified completion - Industry-recognized training certificates',
+    'Tailored curriculum - Customized to your specific tech stack and business goals',
+    'Live coding sessions - Interactive workshops with immediate practical application',
   ];
+
+  openContact(): void {
+    window.location.href = 'mailto:gentleman@ohmybitz.com';
+  }
 }

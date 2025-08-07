@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-win95-modal',

@@ -14,14 +14,14 @@ export const routes: Routes = [
     path: 'private-mentoring',
     loadComponent: () =>
       import('./pages/private-mentoring/private-mentoring').then(
-        (m) => m.PrivateMentoring,
+        (m) => m.PrivateMentoring
       ),
   },
   {
     path: 'corporate-training',
     loadComponent: () =>
       import('./pages/corporate-training/corporate-training').then(
-        (m) => m.CorporateTraining,
+        (m) => m.CorporateTraining
       ),
   },
   {

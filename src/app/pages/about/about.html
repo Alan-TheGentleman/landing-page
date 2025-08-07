@@ -1,7 +1,7 @@
 <app-layout>
   <div class="about-container">
-    <app-win95-back-button></app-win95-back-button>
-    <app-card title="About - Gentleman Programming" class="main-card">
+    <div class="main-card about-content">
+      <h1 class="page-title">About - Gentleman Programming</h1>
       <!-- Hero Section -->
       <app-win95-group>
         <div class="profile-section">
@@ -16,18 +16,19 @@
             />
           </div>
           <div class="profile-info">
-            <h2 class="win95-title">Passionate Developer & Mentor</h2>
+            <h2 class="win95-title">Software Architect & Content Creator</h2>
             <app-win95-info-box>
               <p class="tagline">
-                Transforming developers and teams through modern technologies
-                and best practices
+                Gentleman Programming - Educating the next generation of
+                developers
               </p>
               <p class="description">
-                With over 15 years of experience in software development, I
-                specialize in modern web technologies and have a passion for
-                teaching and mentoring the next generation of developers. My
-                mission is to help individuals and companies achieve their full
-                potential in the tech industry.
+                Senior Software Engineer and Architect with expertise in
+                Angular, TypeScript, and modern web technologies. Author,
+                open-source contributor, and educator with a passion for sharing
+                knowledge. I help developers and teams master cutting-edge
+                technologies through personalized mentoring and tailored
+                training programs.
               </p>
             </app-win95-info-box>
           </div>
@@ -46,6 +47,20 @@
                 <span class="period win95-secondary">{{exp.period}}</span>
               </div>
               <p class="job-description win95-text">{{exp.description}}</p>
+            </div>
+          </div>
+          }
+        </div>
+      </app-win95-group>
+
+      <!-- Community Stats Section -->
+      <app-win95-group title="Community Reach">
+        <div class="stats-grid">
+          @for(stat of communityStats; track stat.platform) {
+          <div class="stat-item win95-stat">
+            <div class="stat-content">
+              <span class="stat-platform win95-label">{{stat.platform}}</span>
+              <span class="stat-metric win95-text">{{stat.metric}}</span>
             </div>
           </div>
           }
@@ -72,12 +87,11 @@
             to hear from you!
           </p>
           <div class="contact-buttons win95-button-group">
-            <app-button>Send Message</app-button>
-            <app-button>View Portfolio</app-button>
-            <app-button>Download CV</app-button>
+            <app-button (click)="openContact()">Send Message</app-button>
+            <app-button (click)="openLinkedIn()">View Portfolio</app-button>
           </div>
         </app-win95-info-box>
       </app-win95-group>
-    </app-card>
+    </div>
   </div>
 </app-layout>

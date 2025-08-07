@@ -1,15 +1,14 @@
 <app-layout>
   <div class="training-container">
-    <app-win95-back-button></app-win95-back-button>
-    <app-card title="Corporate Training Programs" class="main-card">
+    <div class="main-card training-content">
+      <h1 class="page-title">Corporate Training Programs</h1>
       <app-win95-group>
         <h2 class="win95-title">Transform Your Development Team</h2>
         <app-win95-info-box>
           <p class="win95-text">
-            Elevate your team's skills with comprehensive training programs
-            designed for modern software development. From startups to
-            enterprise companies, we help teams master cutting-edge technologies
-            and best practices.
+            Transform your team with training programs built specifically for your needs.
+            No generic courses - everything is tailored to your tech stack, team size,
+            and business objectives. We adapt to your schedule and priorities.
           </p>
         </app-win95-info-box>
       </app-win95-group>
@@ -23,8 +22,8 @@
               <p class="description win95-text">{{program.description}}</p>
               <div class="program-details win95-details">
                 <div class="detail-item">
-                  <span class="label win95-label">Duration:</span>
-                  <span class="value win95-text">{{program.duration}}</span>
+                  <span class="label win95-label">Approach:</span>
+                  <span class="value win95-text">{{program.approach}}</span>
                 </div>
                 <div class="detail-item">
                   <span class="label win95-label">Team Size:</span>
@@ -34,9 +33,6 @@
                   <span class="label win95-label">Format:</span>
                   <span class="value win95-text">{{program.format}}</span>
                 </div>
-              </div>
-              <div class="program-actions">
-                <app-button>Get Quote</app-button>
               </div>
             </div>
           </div>
@@ -62,11 +58,10 @@
             for your organization.
           </p>
           <div class="cta-buttons win95-button-group">
-            <app-button>Schedule Consultation</app-button>
-            <app-button>Download Brochure</app-button>
+            <app-button (click)="openContact()">Contact Me</app-button>
           </div>
         </app-win95-info-box>
       </app-win95-group>
-    </app-card>
+    </div>
   </div>
 </app-layout>
