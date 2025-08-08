@@ -55,16 +55,31 @@ constructor(private router: Router) {} // ✗ Avoid
 protected openFolders = signal<Set<string>>(new Set());
 ```
 
-3. **Components are standalone**:
+3. **Use output() instead of @Output EventEmitter**:
+```typescript
+protected readonly clicked = output<void>();  // ✓ Correct
+@Output() clicked = new EventEmitter<void>(); // ✗ Avoid
+```
+
+4. **Components are standalone - import ONLY what's needed**:
 ```typescript
 @Component({
   standalone: true,
-  imports: [CommonModule, Win95HeaderComponent],
-  // ...
+  imports: [NgOptimizedImage, Win95HeaderComponent], // ✓ Specific imports
+  // Never use CommonModule unless absolutely necessary
 })
 ```
 
-4. **Path aliases configured**:
+5. **NEVER import CommonModule** - import specific directives instead:
+```typescript
+// ✗ AVOID
+import { CommonModule } from '@angular/common';
+
+// ✓ CORRECT - import only what you need
+import { NgIf, NgFor, NgClass } from '@angular/common';
+```
+
+### Path Aliases
 - `@shared/*` → `src/app/shared/*`
 - `@src/*` → `src/*`
 

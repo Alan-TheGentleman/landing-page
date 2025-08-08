@@ -5,6 +5,12 @@
 html {
   height: 100%;
   overflow: hidden;
+  font-size: 75%; /* 12px base (75% of 16px browser default) */
+  
+  /* Mobile: increase to 16px base */
+  @media (max-width: 768px) {
+    font-size: 100%; /* 16px base (100% of browser default) */
+  }
 }
 
 body {
@@ -53,15 +59,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 16px;
+  font-size: 1.333rem; /* 16px at 12px base, 21.33px at 16px base */
 }
 
 h2 {
-  font-size: 14px;
+  font-size: 1.167rem; /* 14px at 12px base, 18.67px at 16px base */
 }
 
 h3 {
-  font-size: 12px;
+  font-size: 1rem; /* 12px at 12px base, 16px at 16px base */
 }
 
 h4, h5, h6 {

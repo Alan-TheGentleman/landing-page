@@ -7,7 +7,7 @@
   background: #000;
   color: #ccc;
   font-family: 'Courier New', monospace;
-  font-size: 14px;
+  font-size: 1.167rem; /* 14px */
   font-weight: normal;
   z-index: 99999;
   cursor: pointer;
@@ -44,7 +44,7 @@
   
   .copyright {
     color: #ccc;
-    font-size: 13px;
+    font-size: 1.083rem; /* 13px */
   }
 }
 
@@ -137,7 +137,7 @@
     
     .date {
       color: #888;
-      font-size: 12px;
+      font-size: 1rem; /* 12px */;
     }
   }
 }
@@ -154,7 +154,7 @@
 // Mobile adjustments
 @media (max-width: 768px) {
   .boot-screen {
-    font-size: 12px;
+    font-size: 1rem; /* 12px */;
   }
   
   .boot-content {
@@ -184,7 +184,7 @@
     left: 15px;
     
     .instruction-line {
-      font-size: 11px;
+      font-size: 0.917rem; /* 11px */
     }
   }
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { Button, Win95GroupComponent, Win95InfoBoxComponent } from '@shared/ui';
 import { Layout } from '../../core/layout/layout';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [Layout, Button, Win95GroupComponent, Win95InfoBoxComponent],
+  imports: [Layout, Button, Win95GroupComponent, Win95InfoBoxComponent, NgOptimizedImage],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

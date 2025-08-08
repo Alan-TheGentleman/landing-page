@@ -1,11 +1,5 @@
-import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  type OnInit,
-  Output,
-  signal,
-} from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { Component, OnDestroy, output, signal } from '@angular/core';
 
 interface BootLine {
   text: string;
@@ -15,18 +9,29 @@ interface BootLine {
 
 @Component({
   selector: 'app-boot-screen',
-  imports: [CommonModule],
+  imports: [NgOptimizedImage],
   template: `
     <div class="boot-screen" [class.boot-screen--hidden]="isHidden()">
       <div class="boot-content">
         <!-- BIOS Header with Logo -->
         <div class="bios-header">
           <div class="bios-header-left">
-            <div class="bios-title">Award Modular BIOS v4.51PG, An Energy Star Ally</div>
-            <div class="copyright">Copyright (C) 1984-98, Award Software, Inc.</div>
+            <div class="bios-title">
+              Award Modular BIOS v4.51PG, An Energy Star Ally
+            </div>
+            <div class="copyright">
+              Copyright (C) 1984-98, Award Software, Inc.
+            </div>
           </div>
           <div class="energy-star">
-            <img src="/energy-star-logo.jpg" alt="Energy Star" class="energy-star-logo" />
+            <img
+              ngSrc="/energy-star-logo.webp"
+              alt="Energy Star"
+              class="energy-star-logo"
+              width="180"
+              height="112"
+              priority
+            />
           </div>
         </div>
 
@@ -36,12 +41,12 @@ interface BootLine {
             <span class="address">061680MS</span>
             <span class="version">v1.3 111700</span>
           </div>
-          
+
           <div class="cpu-info">
             <span>PENTIUM III-MMX CPU at 500 MHz</span>
             <span class="bus-info">, Host Bus 100MHz</span>
           </div>
-          
+
           <div class="memory-test">
             Memory Test : <span class="test-result">393216K OK</span>
           </div>
@@ -49,10 +54,10 @@ interface BootLine {
 
         <!-- Boot Progress Lines -->
         <div class="boot-lines">
-          @for(line of displayedLines(); track $index) {
+          @for (line of displayedLines(); track $index) {
             <div class="boot-line" [class.typing]="line.typing">
               {{ line.text }}
-              @if(line.typing) {
+              @if (line.typing) {
                 <span class="cursor">_</span>
               }
             </div>
@@ -62,7 +67,8 @@ interface BootLine {
         <!-- Boot Instructions -->
         <div class="boot-instructions" [class.visible]="showInstructions()">
           <div class="instruction-line">
-            Press <span class="key">F1</span> to continue, <span class="key">DEL</span> to enter SETUP
+            Press <span class="key">F1</span> to continue,
+            <span class="key">DEL</span> to enter SETUP
           </div>
           <div class="instruction-line">
             <span class="date">12/15/1997-i440ZX-W977-2A69KM4NC-00</span>
@@ -73,12 +79,14 @@ interface BootLine {
   `,
   styleUrl: './boot-screen.scss',
 })
-export class BootScreenComponent implements OnInit {
-  @Output() bootComplete = new EventEmitter<void>();
+export class BootScreenComponent implements OnDestroy {
+  protected readonly bootComplete = output<void>();
 
   protected displayedLines = signal<BootLine[]>([]);
   protected showInstructions = signal(false);
   protected isHidden = signal(false);
+  
+  private isActive = true;
 
   private bootSequence: BootLine[] = [
     { text: 'Award Plug and Play BIOS Extension v1.0A', delay: 300 },
@@ -94,10 +102,12 @@ export class BootScreenComponent implements OnInit {
     { text: '', delay: 600 },
   ];
 
-  private currentIndex = 0;
-
-  ngOnInit() {
+  constructor() {
     this.startBootSequence();
+  }
+  
+  ngOnDestroy() {
+    this.isActive = false;
   }
 
   private async startBootSequence() {
@@ -127,7 +137,10 @@ export class BootScreenComponent implements OnInit {
 
     // Auto-complete after showing instructions
     await this.delay(1500);
-    this.completeBoot();
+    
+    if (this.isActive) {
+      this.completeBoot();
+    }
   }
 
   private async typeText(text: string, baseDelay: number) {
@@ -163,14 +176,12 @@ export class BootScreenComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  private async completeBoot() {
-    // Fade out effect
-    this.isHidden.set(true);
-
-    // Wait for fade animation to complete
-    await this.delay(800);
-
+  private completeBoot() {
+    // Emit immediately before animation
     this.bootComplete.emit();
+    
+    // Then start fade out effect
+    this.isHidden.set(true);
   }
 
   // Allow manual skip by clicking anywhere

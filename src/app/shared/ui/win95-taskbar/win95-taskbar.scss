@@ -128,7 +128,7 @@
     border-right: 1px solid $win95-gray;
 
     .tray-icon {
-      font-size: 12px;
+      font-size: 1rem; /* 12px */
       cursor: pointer;
       padding: 2px;
 
@@ -186,7 +186,7 @@
     text-orientation: mixed;
     padding: 6px 3px;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 1rem; /* 12px */
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -215,7 +215,7 @@
     }
 
     .menu-icon {
-      font-size: 16px;
+      font-size: 1.333rem; /* 16px */
       width: 20px;
       text-align: center;
     }
@@ -259,14 +259,14 @@
       max-width: 120px;
       height: 20px;
       padding: 1px 4px;
-      font-size: 10px;
+      font-size: 0.833rem; /* 10px */
       
       .window-icon {
-        font-size: 12px;
+        font-size: 1rem; /* 12px */
       }
       
       .window-title {
-        font-size: 9px;
+        font-size: 0.75rem; /* 9px */
       }
     }
 
@@ -289,14 +289,14 @@
         padding-right: 3px;
 
         .tray-icon {
-          font-size: 11px;
+          font-size: 0.917rem; /* 11px */
           padding: 1px;
         }
       }
 
       .taskbar-clock {
         min-width: 65px;
-        font-size: 10px;
+        font-size: 0.833rem; /* 10px */
         padding: 1px 4px;
       }
     }
@@ -308,15 +308,15 @@
 
     .start-menu-sidebar {
       width: 28px;
-      font-size: 11px;
+      font-size: 0.917rem; /* 11px */
     }
 
     .start-menu-item {
       padding: 6px 10px;
-      font-size: 10px;
+      font-size: 0.833rem; /* 10px */
 
       .menu-icon {
-        font-size: 14px;
+        font-size: 1.167rem; /* 14px */
         width: 18px;
       }
     }

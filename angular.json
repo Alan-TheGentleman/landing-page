@@ -25,7 +25,6 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/favicon.ico",
               "src/site.webmanifest",
               "src/robots.txt",
               "src/sitemap.xml"
@@ -86,7 +85,6 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/favicon.ico",
               "src/site.webmanifest",
               "src/robots.txt",
               "src/sitemap.xml"

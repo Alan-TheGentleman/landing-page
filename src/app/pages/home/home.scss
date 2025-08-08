@@ -80,59 +80,39 @@
   grid-row: 2;
 }
 
-// Add more specific positions as needed
+// Position .bat files when folder is open
 ::ng-deep .icon-private-mentoring {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
 }
 
 ::ng-deep .icon-corporate-training {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 2;
 }
 
 // Mobile responsive
 @media (max-width: 768px) {
   .desktop-icons {
-    padding: 15px;
+    grid-template-columns: repeat(auto-fill, 90px);
+    grid-template-rows: repeat(auto-fill, 135px);
+    gap: 12px;
+    row-gap: 14px;
+    padding: 10px;
     bottom: 35px; // Account for larger mobile taskbar
-    grid-template-columns: repeat(auto-fill, 70px);
-    grid-template-rows: repeat(auto-fill, 85px);
-    gap: 15px;
   }
   
   ::ng-deep .desktop-icon {
     padding: 6px;
     
     .icon-text {
-      font-size: 10px;
+      font-size: 0.833rem; /* 10px */
       max-width: 60px;
     }
     
     .icon-image {
       width: 28px;
       height: 28px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .desktop-icons {
-    grid-template-columns: repeat(auto-fill, 65px);
-    grid-template-rows: repeat(auto-fill, 80px);
-    gap: 12px;
-    padding: 10px;
-  }
-  
-  ::ng-deep .desktop-icon {
-    .icon-text {
-      font-size: 9px;
-      max-width: 55px;
-    }
-    
-    .icon-image {
-      width: 24px;
-      height: 24px;
     }
   }
 }

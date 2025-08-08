@@ -69,7 +69,7 @@ export class Home {
       description: 'Learn about my journey and experience',
       route: '/about',
       type: 'image',
-      image: 'gentleman.webp',
+      image: '/gentleman.webp',
     },
   ];
 
@@ -94,7 +94,7 @@ export class Home {
 
     // Si no hay carpetas abiertas, mostrar solo elementos de nivel raíz
     return this.fileSystem.filter(
-      (item) => item.type !== 'folder' || !openSet.has(item.id)
+      (item) => item.type !== 'folder' || !openSet.has(item.id),
     );
   }
   onItemClick(item: FileSystemItem): void {
@@ -123,7 +123,7 @@ export class Home {
         '/private-mentoring': {
           id: 'private-mentoring',
           title: 'Private Mentoring Sessions',
-          icon: '👨‍🏫',
+          icon: '👨',
           route: '/private-mentoring',
         },
         '/corporate-training': {
@@ -184,7 +184,7 @@ export class Home {
     if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
       return (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
+          navigator.userAgent,
         ) || window.innerWidth <= 768
       );
     }
