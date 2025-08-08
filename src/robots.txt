@@ -1,0 +1,22 @@
+# Robots.txt for Gentleman Programming
+# https://gentlemanprogramming.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://gentlemanprogramming.com/sitemap.xml
+
+# Crawl-delay (in seconds) for respectful crawling
+Crawl-delay: 1
+
+# Allow search engine image crawlers
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: bingbot
+Allow: /
+Crawl-delay: 2

@@ -6,8 +6,8 @@ import {
   Win95ModalComponent,
   Win95TaskbarComponent,
 } from '@shared/ui';
-import { WindowManagerService } from '../../services/window-manager.service';
 import { BootService } from '../../services/boot.service';
+import { WindowManagerService } from '../../services/window-manager.service';
 
 interface FileSystemItem {
   id: string;
@@ -22,7 +22,12 @@ interface FileSystemItem {
 
 @Component({
   selector: 'app-home',
-  imports: [BootScreenComponent, Win95IconComponent, Win95ModalComponent, Win95TaskbarComponent],
+  imports: [
+    BootScreenComponent,
+    Win95IconComponent,
+    Win95ModalComponent,
+    Win95TaskbarComponent,
+  ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -119,28 +124,29 @@ export class Home {
           id: 'private-mentoring',
           title: 'Private Mentoring Sessions',
           icon: '👨‍🏫',
-          route: '/private-mentoring'
+          route: '/private-mentoring',
         },
         '/corporate-training': {
-          id: 'corporate-training', 
+          id: 'corporate-training',
           title: 'Corporate Training Programs',
           icon: '🏢',
-          route: '/corporate-training'
+          route: '/corporate-training',
         },
         '/about': {
           id: 'about',
           title: 'About - Gentleman Programming',
           icon: '👤',
-          route: '/about'
-        }
+          route: '/about',
+        },
       };
-      
-      const windowConfig = windowConfigs[item.route as keyof typeof windowConfigs];
-      
+
+      const windowConfig =
+        windowConfigs[item.route as keyof typeof windowConfigs];
+
       if (windowConfig) {
         this.windowManager.openWindow(windowConfig);
       }
-      
+
       this.router.navigate([item.route]);
     }
   }
@@ -166,11 +172,11 @@ export class Home {
     // If navigating to home, close all windows
     if (route === '/home') {
       const openWindows = this.windowManager.openWindows();
-      openWindows.forEach(window => {
+      openWindows.forEach((window) => {
         this.windowManager.closeWindow(window.id);
       });
     }
-    
+
     this.router.navigate([route]);
   }
 

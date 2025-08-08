@@ -1,26 +1,21 @@
 import { Component } from '@angular/core';
-import {
-  Button,
-  Win95GroupComponent,
-  Win95InfoBoxComponent,
-} from '@shared/ui';
+import { Button, Win95GroupComponent, Win95InfoBoxComponent } from '@shared/ui';
 import { Layout } from '../../core/layout/layout';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [
-    Layout,
-    Button,
-    Win95GroupComponent,
-    Win95InfoBoxComponent,
-  ],
+  imports: [Layout, Button, Win95GroupComponent, Win95InfoBoxComponent],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
 export class About {
   protected communityStats = [
-    { platform: 'YouTube', metric: '85K+ Subscribers • 750+ Videos', icon: '▶' },
+    {
+      platform: 'YouTube',
+      metric: '85K+ Subscribers • 750+ Videos',
+      icon: '▶',
+    },
     { platform: 'Instagram', metric: '52K+ Followers', icon: '📷' },
     { platform: 'TikTok', metric: '23K+ Followers • 266K+ Likes', icon: '📱' },
     { platform: 'Twitch', metric: '15K+ Followers • Live Coding', icon: '🎮' },

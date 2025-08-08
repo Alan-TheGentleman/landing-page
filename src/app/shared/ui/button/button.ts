@@ -1,4 +1,4 @@
-import { Component, input, output, inject } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { SoundService } from '../../../services/sound.service';
 
 const BUTTON_TYPE_OPTIONS = {
@@ -16,7 +16,7 @@ const BUTTON_TYPE_OPTIONS = {
 })
 export class Button {
   private soundService = inject(SoundService);
-  
+
   type = input<HTMLButtonElement['type']>(BUTTON_TYPE_OPTIONS.button);
   clicked = output<void>();
 

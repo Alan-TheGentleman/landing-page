@@ -1,5 +1,11 @@
-import { Component, EventEmitter, OnInit, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  type OnInit,
+  Output,
+  signal,
+} from '@angular/core';
 
 interface BootLine {
   text: string;
@@ -65,7 +71,7 @@ interface BootLine {
       </div>
     </div>
   `,
-  styleUrl: './boot-screen.scss'
+  styleUrl: './boot-screen.scss',
 })
 export class BootScreenComponent implements OnInit {
   @Output() bootComplete = new EventEmitter<void>();
@@ -85,7 +91,7 @@ export class BootScreenComponent implements OnInit {
     { text: '', delay: 200 },
     { text: 'Floppy disk(s) fail (40)', delay: 500 },
     { text: 'CMOS checksum error - Defaults loaded', delay: 400 },
-    { text: '', delay: 600 }
+    { text: '', delay: 600 },
   ];
 
   private currentIndex = 0;
@@ -100,21 +106,25 @@ export class BootScreenComponent implements OnInit {
 
     for (let i = 0; i < this.bootSequence.length; i++) {
       const line = this.bootSequence[i];
-      
+
       // Add line with typing effect for important lines
-      const shouldType = line.text.includes('Detecting') || line.text.includes('CMOS');
-      
+      const shouldType =
+        line.text.includes('Detecting') || line.text.includes('CMOS');
+
       if (shouldType) {
         await this.typeText(line.text, line.delay);
       } else {
-        this.displayedLines.update(lines => [...lines, { ...line, typing: false }]);
+        this.displayedLines.update((lines) => [
+          ...lines,
+          { ...line, typing: false },
+        ]);
         await this.delay(line.delay);
       }
     }
 
     // Show instructions after boot sequence
     this.showInstructions.set(true);
-    
+
     // Auto-complete after showing instructions
     await this.delay(1500);
     this.completeBoot();
@@ -122,21 +132,25 @@ export class BootScreenComponent implements OnInit {
 
   private async typeText(text: string, baseDelay: number) {
     const typingLine: BootLine = { text: '', delay: 0, typing: true };
-    this.displayedLines.update(lines => [...lines, typingLine]);
-    
+    this.displayedLines.update((lines) => [...lines, typingLine]);
+
     for (let i = 0; i <= text.length; i++) {
       const currentText = text.substring(0, i);
-      this.displayedLines.update(lines => {
+      this.displayedLines.update((lines) => {
         const updated = [...lines];
-        updated[updated.length - 1] = { text: currentText, delay: 0, typing: true };
+        updated[updated.length - 1] = {
+          text: currentText,
+          delay: 0,
+          typing: true,
+        };
         return updated;
       });
-      
+
       await this.delay(15 + Math.random() * 15); // Faster typing speed
     }
 
     // Remove typing cursor
-    this.displayedLines.update(lines => {
+    this.displayedLines.update((lines) => {
       const updated = [...lines];
       updated[updated.length - 1] = { text, delay: 0, typing: false };
       return updated;
@@ -146,16 +160,16 @@ export class BootScreenComponent implements OnInit {
   }
 
   private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   private async completeBoot() {
     // Fade out effect
     this.isHidden.set(true);
-    
+
     // Wait for fade animation to complete
     await this.delay(800);
-    
+
     this.bootComplete.emit();
   }
 

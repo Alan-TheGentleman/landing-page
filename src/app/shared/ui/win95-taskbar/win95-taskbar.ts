@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { WindowManagerService } from '../../../services/window-manager.service';
 import { SoundService } from '../../../services/sound.service';
+import { WindowManagerService } from '../../../services/window-manager.service';
 
 @Component({
   selector: 'app-win95-taskbar',
@@ -150,9 +150,9 @@ export class Win95TaskbarComponent {
   }
 
   focusWindow(id: string): void {
-    const window = this.windowManager.openWindows().find(w => w.id === id);
+    const window = this.windowManager.openWindows().find((w) => w.id === id);
     if (!window) return;
-    
+
     // If window is minimized, restore it
     if (window.minimized) {
       this.windowManager.restoreWindow(id);
@@ -181,7 +181,7 @@ export class Win95TaskbarComponent {
   navigateTo(route: string): void {
     this.soundService.play('button-click');
     this.toggleStartMenu();
-    
+
     // Define window properties based on route
     const windowConfigs = {
       '/home': null, // Home doesn't use window system
@@ -189,28 +189,28 @@ export class Win95TaskbarComponent {
         id: 'private-mentoring',
         title: 'Private Mentoring Sessions',
         icon: '👨‍🏫',
-        route: '/private-mentoring'
+        route: '/private-mentoring',
       },
       '/corporate-training': {
-        id: 'corporate-training', 
+        id: 'corporate-training',
         title: 'Corporate Training Programs',
         icon: '🏢',
-        route: '/corporate-training'
+        route: '/corporate-training',
       },
       '/about': {
         id: 'about',
         title: 'About - Gentleman Programming',
         icon: '👤',
-        route: '/about'
-      }
+        route: '/about',
+      },
     };
-    
+
     const windowConfig = windowConfigs[route as keyof typeof windowConfigs];
-    
+
     if (windowConfig) {
       this.windowManager.openWindow(windowConfig);
     }
-    
+
     this.router.navigate([route]);
   }
 
@@ -227,7 +227,7 @@ export class Win95TaskbarComponent {
   toggleSound(): void {
     const wasEnabled = this.soundService.isEnabled();
     this.soundService.setEnabled(!wasEnabled);
-    
+
     // Play a sound to confirm the action (only if enabling sounds)
     if (!wasEnabled) {
       // Small delay to ensure the service is enabled before playing
