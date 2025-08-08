@@ -18,12 +18,21 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: $win95-desktop url('/background.jpg') center center;
+  background: $win95-desktop url('/background.webp') center center;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
   overflow: auto;
   @include win95-scrollbar;
+  
+  // Use smaller images for different screen sizes
+  @media (max-width: 1366px) {
+    background-image: url('/background-medium.webp');
+  }
+  
+  @media (max-width: 768px) {
+    background-image: url('/background-mobile.webp');
+  }
   
   // Add subtle overlay to maintain Windows 95 aesthetic
   &::before {
